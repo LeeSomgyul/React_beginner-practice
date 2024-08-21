@@ -1,4 +1,3 @@
-import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Root from "./Root";
 import Coins from "./routes/Coins";
