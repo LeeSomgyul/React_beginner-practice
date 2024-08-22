@@ -12,3 +12,8 @@ export async function fetchCoinPrice(coinId: string){
     const priceData = await(await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`)).json();
     return priceData;
 }
+
+export async function fetchCoinHistory(coinId: string){
+    const coinHistory = await(await fetch(`https://ohlcv-api.nomadcoders.workers.dev?coinId=${coinId}`)).json();
+    return coinHistory;
+}
