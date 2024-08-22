@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 const GlobalStyle = createGlobalStyle`
   html, body, div, span, applet, object, iframe,
@@ -66,6 +67,7 @@ function Root(){
       <div>
         <Outlet/>
       </div>
+      <ReactQueryDevtools initialIsOpen={false}/>
     </>
   );
 }
