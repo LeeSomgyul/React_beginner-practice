@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
-import { theme } from './theme';
 import router from './Router';
 import Root from './Root';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -15,10 +13,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClint}>
-      <ThemeProvider theme={theme}>
-        <Root/>
-        <RouterProvider router={router}/>
-      </ThemeProvider>
+      <Root/>
+      <RouterProvider router={router}/>
     </QueryClientProvider>
   </React.StrictMode>
 );

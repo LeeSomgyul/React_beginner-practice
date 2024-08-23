@@ -1,5 +1,6 @@
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import styled from "styled-components";
 import {Helmet} from "react-helmet";
 import { fetchCoins } from "../api";
@@ -27,8 +28,8 @@ const CoinsList = styled.ul`
 `;
 
 const Coin = styled.li`
-    background-color: white;
-    color: ${(props) => props.theme.bgColor};
+    background-color: #969696;
+    color: ${(props) => props.theme.textColor};
     margin-bottom: 10px;
     padding: 20px;
     border-radius: 15px;
@@ -62,7 +63,12 @@ interface ICoin {
     type: string,
 }
 
+interface IRouterProps{
+    toggleDark: ()=>void;
+}
+
 function Coins (){
+    const { toggleDark } = useOutletContext<IRouterProps>();
     const {isLoading, data} = useQuery<ICoin[]>("allCoins", fetchCoins);
 
     return (
@@ -72,6 +78,7 @@ function Coins (){
             </Helmet>
             <Header>
                 <Title>코인</Title>
+                <button onClick={toggleDark}>다크/라이트</button>
             </Header>
             {isLoading ? 
                 (<Loader>Loading...</Loader>) :

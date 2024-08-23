@@ -1,5 +1,6 @@
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import {fetchCoinHistory} from "../api";
 import ApexCharts from "react-apexcharts";
 
@@ -14,7 +15,12 @@ interface IHistorical {
     market_cap: number;
 }
 
+interface IToggleType{
+    isDark: boolean;
+}
+
 function Chart (){
+    const {isDark} = useOutletContext<IToggleType>();
     const {coinId} = useParams();
     const {isLoading, data} = useQuery<IHistorical[]>(
         ["ohlcv", coinId],
@@ -28,6 +34,7 @@ function Chart (){
     return(
         <div>{isLoading ? (
             "Loading chart..." ) : (
+                data && Array.isArray(data) ? (
                 <ApexCharts
                     type="line"
                     series={[
@@ -38,7 +45,7 @@ function Chart (){
                     ]}
                     options={{
                         theme:{
-                            mode: "dark",
+                            mode: isDark ? "dark" : "light",
                         },
                         chart:{
                             height: 500,
@@ -57,6 +64,9 @@ function Chart (){
                         }
                     }}
                 />
+            ) : (
+                <p>No data available</p>
+              )
             )}
         </div>
     );
