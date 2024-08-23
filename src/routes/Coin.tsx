@@ -3,7 +3,6 @@ import { Link, useMatch } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import {Helmet} from "react-helmet";
 import { useLocation, useParams } from "react-router-dom";
-import { useOutletContext } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinPrice } from "../api";
 
@@ -136,11 +135,9 @@ interface IPriceData{
 }
 
 interface IToggleType{
-    isDark: boolean;
 }
 
 function Coin (){
-    const {isDark} = useOutletContext<IToggleType>();
     const {coinId} = useParams<{ coinId?: string }>();
     const location = useLocation();
     const chartMatch = useMatch("/:coinId/chart");
@@ -212,7 +209,7 @@ function Coin (){
                             <Link to={`/${coinId}/price`}>Price</Link>
                         </Tab>
                     </Tabs>
-                    <Outlet context={{isDark}}/>
+                    <Outlet/>
                 </>
             )}
         </Container>

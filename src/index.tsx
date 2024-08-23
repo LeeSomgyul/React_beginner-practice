@@ -4,6 +4,7 @@ import { RouterProvider } from 'react-router-dom';
 import router from './Router';
 import Root from './Root';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { RecoilRoot } from 'recoil';
 
 const queryClint = new QueryClient();
 
@@ -12,9 +13,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClint}>
-      <Root/>
-      <RouterProvider router={router}/>
-    </QueryClientProvider>
+    <RecoilRoot>
+      <QueryClientProvider client={queryClint}>
+        <Root/>
+        <RouterProvider router={router}/>
+      </QueryClientProvider>
+    </RecoilRoot>
   </React.StrictMode>
 );
